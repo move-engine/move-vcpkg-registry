@@ -27,26 +27,26 @@ elseif(ARCHITECTURE_STRING STREQUAL "arm")
     set(ARCHITECTURE_STRING "aarch32")
 endif()
 
-set(FILENAME "wgpu-${ARCHITECTURE_STRING}-release.zip")
+set(FILENAME "wgpu-${OS_TARGET}-${ARCHITECTURE_STRING}-release.zip")
 string(TOLOWER ${FILENAME} FILENAME)
 
-set(SHA512 "")
+set(SHA512 "0")
 if (FILENAME STREQUAL "wgpu-linux-aarch64-release.zip")
-    set(SHA512 "???")
+    set(SHA512 "0")
 elseif(FILENAME STREQUAL "wgpu-linux-x86_64-release.zip")
-    set(SHA512 "???")
+    set(SHA512 "0")
 elseif(FILENAME STREQUAL "wgpu-macos-aarch64-release.zip")
-    set(SHA512 "???")
+    set(SHA512 "0")
 elseif(FILENAME STREQUAL "wgpu-macos-x86_64.zip")
-    set(SHA512 "???")
+    set(SHA512 "0")
 elseif(FILENAME STREQUAL "wgpu-windows-i686-release.zip")
-    set(SHA512 "???")
+    set(SHA512 "0")
 elseif(FILENAME STREQUAL "wgpu-windows-x86_64-release.zip")
-    set(SHA512 "???")
+    set(SHA512 "cebdcca7ad37cfaed74af1ac64ea49392d800fa25a41cff85376f4033acbbe289cba0e07ee8211af9147755aa5de5c789c04ceb10bea4bee4f51936f4e18969e")
 endif()
 
 vcpkg_download_distfile(ARCHIVE
-    URLS "${DOWNLOAD_URL}"
+    URLS "${DOWNLOAD_URL}/${FILENAME}"
     FILENAME "${FILENAME}"
     SHA512 "${SHA512}"
 )
@@ -64,6 +64,7 @@ file(COPY "${PACKAGE_PATH}/wgpu_native.dll" DESTINATION "${CURRENT_PACKAGES_DIR}
 
 file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/debug")
 file(COPY "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/lib" DESTINATION "${CURRENT_PACKAGES_DIR}/debug")
+vcpkg_install_copyright(FILE_LIST "${CMAKE_CURRENT_LIST_DIR}/LICENSE")
 
 file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
 # vcpkg_install_copyright(FILE_LIST "${PACKAGE_PATH}/LICENSE.txt")
