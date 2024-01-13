@@ -1,0 +1,4 @@
+The wgpu-native package provides CMake targets:
+
+    find_package(wgpu_native REQUIRED)
+    target_link_libraries(myapp PRIVATE wgpu-native::wgpu-native)
