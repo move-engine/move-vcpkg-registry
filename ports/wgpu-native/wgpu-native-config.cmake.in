@@ -2,15 +2,16 @@ get_filename_component(_wgpu_native_root "${CMAKE_CURRENT_LIST_FILE}" PATH)
 get_filename_component(_wgpu_native_root "${_wgpu_native_root}" PATH)
 get_filename_component(_wgpu_native_root "${_wgpu_native_root}" PATH)
 
-set(_wgpu_native_root_lib "${_wgpu_native_root}/lib/wgpu_native.lib")
+set(_wgpu_native_root_lib "${_wgpu_native_root}/lib/wgpu_native.dll.lib")
 if (EXISTS "${_wgpu_native_root_lib}")
    add_library(wgpu-native::wgpu-native SHARED IMPORTED)
    set_target_properties(wgpu-native::wgpu-native PROPERTIES
-      IMPORTED_LOCATION                    "${_wgpu_native_root}/bin/dstorage.dll"
+      IMPORTED_LOCATION                    "${_wgpu_native_root}/bin/wgpu_native.dll"
       IMPORTED_IMPLIB                      "${_wgpu_native_root_lib}"
       INTERFACE_INCLUDE_DIRECTORIES        "${_wgpu_native_root}/include"
       IMPORTED_LINK_INTERFACE_LANGUAGES    "C")
 
+   target_link_directories(wgpu-native::wgpu-native INTERFACE "${_wgpu_native_root}/lib")
    target_link_libraries(wgpu-native::wgpu-native INTERFACE wgpu_native)
    set(wgpu_native_FOUND TRUE)
 else()

@@ -4,5 +4,11 @@
   "description": "Native WebGPU implementation based on wgpu-core",
   "homepage": "https://github.com/gfx-rs/wgpu-native",
   "documentation": "https://github.com/gfx-rs/wgpu-native/wiki/Getting-Started",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
 }
