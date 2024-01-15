@@ -1,6 +1,6 @@
 {
   "name": "wgpu-native",
-  "version": "0.18.1.4",
+  "version": "0.18.1.4.1",
   "description": "Native WebGPU implementation based on wgpu-core",
   "homepage": "https://github.com/gfx-rs/wgpu-native",
   "documentation": "https://github.com/gfx-rs/wgpu-native/wiki/Getting-Started",

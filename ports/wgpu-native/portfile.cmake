@@ -88,6 +88,11 @@ else()
         DESTINATION "${CURRENT_PACKAGES_DIR}/include"
     )
     file(INSTALL
+        "${PACKAGE_PATH}/webgpu.h"
+        "${PACKAGE_PATH}/wgpu.h"
+        DESTINATION "${CURRENT_PACKAGES_DIR}/include/webgpu"
+    )
+    file(INSTALL
         "${PACKAGE_PATH}/wgpu_native.dll.lib"
         "${PACKAGE_PATH}/wgpu_native.lib"
         DESTINATION "${CURRENT_PACKAGES_DIR}/lib"
