@@ -33,7 +33,7 @@ set(DOWNLOAD_FILENAME "wgpu-${OS_TARGET}-${ARCHITECTURE_STRING}-release.zip")
 set(DEBUG_DOWNLOAD_FILENAME "wgpu-${OS_TARGET}-${ARCHITECTURE_STRING}-debug.zip")
 string(TOLOWER ${DOWNLOAD_FILENAME} DOWNLOAD_FILENAME)
 
-include(version.cmake)
+include(./version.cmake)
 
 vcpkg_download_distfile(ARCHIVE
     URLS "${DOWNLOAD_URL}/${DOWNLOAD_FILENAME}"
