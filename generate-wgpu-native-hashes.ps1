@@ -45,7 +45,7 @@ function Get-VersionFromJson {
 function Update-VersionCmake {
     param (
         [string]$JsonFilePath = "ports/wgpu-native/vcpkg.json",
-        [string]$CMakeFilePath = "ports/wgpu-native/version.cmake"
+        [string]$CMakeFilePath = "ports/wgpu-native/latest-hashes.cmake"
     )
 
     # Get version from JSON
@@ -64,13 +64,9 @@ function Update-VersionCmake {
 
     # Initialize CMake content
     $cmakeContent = @"
-
-set(DOWNLOAD_FILENAME "wgpu-${OS_TARGET}-${ARCHITECTURE_STRING}-release.zip")
-set(DEBUG_DOWNLOAD_FILENAME "wgpu-${OS_TARGET}-${ARCHITECTURE_STRING}-debug.zip")
-string(TOLOWER ${DOWNLOAD_FILENAME} DOWNLOAD_FILENAME)
-
 set(DEBUG_SHA512 "0")
 set(RELEASE_SHA512 "0")
+
 "@
 
     $functions = {
@@ -140,18 +136,16 @@ set(RELEASE_SHA512 "0")
         $debugHash = $hashResults[$i + 1]
 
         $cmakeContent += @"
-elseif(DOWNLOAD_FILENAME STREQUAL "wgpu-$os-$arch-release.zip")
+if(DOWNLOAD_FILENAME STREQUAL "wgpu-$os-$arch-release.zip")
     set(RELEASE_SHA512 "$releaseHash")
     set(DEBUG_SHA512 "$debugHash")
+endif()
+
 "@
     }
 
-    $cmakeContent += @"
-endif()
-"@
-
-    # Write the content to the CMake file
-    $cmakeContent | Out-File -FilePath $CMakeFilePath
+    # Write the content to the CMake file as a UTF-8 encoded file
+    $cmakeContent | Out-File -FilePath $CMakeFilePath -Encoding utf8
 }
 
 Update-VersionCmake
